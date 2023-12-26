@@ -11,6 +11,9 @@ from dotenv import load_dotenv, find_dotenv
 
 import streamlit as st
 
+from seed_instruction import available_functions
+
+
 from typing import Literal
 
 _: bool = load_dotenv(find_dotenv())  # read local .env file
@@ -46,7 +49,7 @@ class AITripPlanner:
         """Find an assistant by name and set it if found."""
         assistants = self.list_assistants()
         print("Retrieved assistants list...")
-        if self.assistant is None:  # Check if assistant is not already set
+        if self.assistant is None:  # Check if assistant is not already set           
             for assistant in assistants:
                 if assistant['name'] == name:
                     print("Found assistant...",  assistant['name'] == name)
@@ -57,8 +60,8 @@ class AITripPlanner:
                         new_instructions=instructions,
                         tools=tools,                       
                     )
-                    break 
-    
+                    break
+
     def create_assistant(self, name: str, instructions: str, tools: list, model: str = "gpt-3.5-turbo-1106") -> Assistant:
         """Create or find an assistant."""
         self.find_and_set_assistant_by_name(
