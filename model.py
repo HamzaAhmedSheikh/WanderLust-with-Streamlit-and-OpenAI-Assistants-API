@@ -49,7 +49,9 @@ class AITripPlanner:
         """Find an assistant by name and set it if found."""
         assistants = self.list_assistants()
         print("Retrieved assistants list...")
-        if self.assistant is None:  # Check if assistant is not already set           
+        if self.assistant is None:  # Check if assistant is not already set
+            # it iterates through the list of assistants and checks if the name of the assistant matches the given name.
+            # If a match is found, it calls the modifyAssistant method to update the assistant with the new instructions and tools
             for assistant in assistants:
                 if assistant['name'] == name:
                     print("Found assistant...",  assistant['name'] == name)
@@ -60,8 +62,13 @@ class AITripPlanner:
                         new_instructions=instructions,
                         tools=tools,                       
                     )
-                    break
+                    break 
 
+    
+    # The create_assistant method creates or finds an assistant.
+    # It calls the find_and_set_assistant_by_name method to find an existing assistant with the given name and 
+    # set it if found. If the assistant is not found, it creates a new assistant using the client.beta.assistants.
+    # create method with the given name, instructions, tools, and model                
     def create_assistant(self, name: str, instructions: str, tools: list, model: str = "gpt-3.5-turbo-1106") -> Assistant:
         """Create or find an assistant."""
         self.find_and_set_assistant_by_name(
