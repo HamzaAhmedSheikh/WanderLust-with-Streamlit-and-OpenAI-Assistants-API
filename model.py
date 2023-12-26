@@ -11,7 +11,7 @@ from dotenv import load_dotenv, find_dotenv
 
 import streamlit as st
 
-from seed_instruction import available_functions
+from tool_functions import available_functions
 
 
 from typing import Literal
